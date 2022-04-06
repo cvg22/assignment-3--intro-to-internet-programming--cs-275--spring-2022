@@ -3,7 +3,10 @@ const { src, dest, series, watch } = require(`gulp`),
     htmlValidator = require(`gulp-html`),
     htmlCompressor = require(`gulp-htmlmin`),
     CSSLinter = require(`gulp-stylelint`),
-    jsLinter = require(`gulp-eslint`);
+    babel = require(`gulp-babel`),
+    jsLinter = require(`gulp-eslint`),
+    jsCompressor = require(`gulp-uglify`);
+
 
     let validateHTML = () => {
         return src(`dev/html/*.html`).pipe(htmlValidator())
@@ -33,7 +36,23 @@ const { src, dest, series, watch } = require(`gulp`),
         .pipe(jsLinter.formatEach(`compact`));
   };
 
+  let transpileJSForDev = () => {
+    return src(`dev/js/*.js`)
+        .pipe(babel())
+	      .pipe(jsCompressor())
+        .pipe(dest(`prod/js`));
+  };
+
+  let transpileJSForProd = () => {
+    return src(`dev/js/*.js`)
+        .pipe(babel())
+	      .pipe(jsCompressor())
+        .pipe(dest(`prod/js`));
+  };
+
 exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
 exports.lintCSS = lintCSS;
 exports.lintJS = lintJS;
+exports.transpileJSForDev = transpileJSForDev;
+exports.transpileJSForProd = transpileJSForProd;

@@ -5,8 +5,12 @@
   "main": "gulpfile.js",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "gulp-babel": "^8.0.0",
     "gulp-html": "^4.0.0",
     "gulp-stylelint": "^13.0.0",
+    "gulp-uglify": "^3.0.2",
     "stylelint": "^14.6.1"
   },
   "dependencies": {
