@@ -3,5 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-html": "^4.0.0"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-htmlmin": "^5.0.1"
+  }
 }
