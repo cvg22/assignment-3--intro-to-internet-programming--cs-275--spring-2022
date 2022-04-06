@@ -5,7 +5,9 @@
   "main": "gulpfile.js",
   "license": "ISC",
   "devDependencies": {
-    "gulp-html": "^4.0.0"
+    "gulp-html": "^4.0.0",
+    "gulp-stylelint": "^13.0.0",
+    "stylelint": "^14.6.1"
   },
   "dependencies": {
     "gulp": "^4.0.2",
