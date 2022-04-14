@@ -1,40 +1,42 @@
 window.onload = () => {
     let createMatrix =(input) => {
         let matrix = new Array(input);
-        let n=1;
+        let number=1;
         for (let i = 0; i < input; i++) {
             matrix[i] = new Array(input);
             for (let j = 0; j < input; j++)
-                matrix[i][j]=n++;
+                matrix[i][j]=number++;
         }
         return matrix;
     };
 
-    let initializeMatrixinv = (input, M) => {
+    let initializeMatrixinv = (input, Matrix_inv) => {
         for (let i = 0; i < input -1;i++ ) {
             for (let j= 0; j < input-i-1; j++) {
-                let cop = M[i][j];
-                M[i][j] =  M[input-i-1][input-j-1];
-                M[input-i-1][input-j-1] = cop;
+                let copy = Matrix_inv[i][j];
+                Matrix_inv[i][j] =  Matrix_inv[input-i-1][input-j-1];
+                Matrix_inv[input-i-1][input-j-1] = copy;
             }
         }
     };
 
-    let showMatrix = (M,input, name) => {
-        let outMat = name;
-        outMat += `<table>`;
+    let showMatrix = (Matrix,input, name) => {
+        let outputMatrix = name;
+        outputMatrix += `<table>`;
         for (let i = 0; i < input; i++) {
-            outMat +=`<tr>`;
+            outputMatrix +=`<tr>`;
             for (let j = 0; j < input; j++) {
                 if (i+j === input-1)
-                    outMat +=`<td class = elementsdiag>` + M[i][j] + `</td>`;
+                    outputMatrix +=
+                    `<td class = elementsdiag>` + Matrix[i][j] + `</td>`;
                 else
-                    outMat +=`<td class = elementsmatrix>` + M[i][j] + `</td>`;
+                    outputMatrix +=
+                    `<td class = elementsmatrix>` + Matrix[i][j] + `</td>`;
             }
-            outMat +=`<tr>`;
+            outputMatrix +=`<tr>`;
         }
-        outMat +=`</table>`;
-        return outMat;
+        outputMatrix +=`</table>`;
+        return outputMatrix;
 
     };
 
@@ -59,10 +61,10 @@ window.onload = () => {
     //alert(`The type of input is ${typeof input}`);
     console.log(`The input is`, input);
 
-    let M = createMatrix(input);
-    let outMat = showMatrix(M,input,`<h2>ORIGINAL MATRIX</h2>`);
-    initializeMatrixinv(input, M);
+    let Matrix = createMatrix(input);
+    let outputMatrix = showMatrix(Matrix,input,`<h2>ORIGINAL MATRIX</h2>`);
+    initializeMatrixinv(input, Matrix);
 
-    outMat += showMatrix(M,input,`<h2>FLIPPED MATRIX</h2>`);
-    document.getElementById(`outputmat`).innerHTML = outMat;
+    outputMatrix += showMatrix(Matrix,input,`<h2>FLIPPED MATRIX</h2>`);
+    document.getElementById(`outputmat`).innerHTML = outputMatrix;
 };
