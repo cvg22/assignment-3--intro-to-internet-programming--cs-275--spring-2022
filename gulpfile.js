@@ -98,7 +98,7 @@ exports.serve = series(
     serve
 );
 
-exports.prod = series(
+exports.build = series(
           compressHTML,
 		      compressCSS,
 		      transpileJSForProd);

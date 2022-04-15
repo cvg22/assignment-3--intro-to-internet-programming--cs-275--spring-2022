@@ -1,46 +1,56 @@
 window.onload = () => {
-
     let createMatrix =(input) => {
-        let matrix = new Array(input);
+        let lengthMatrix = input*input;
+        let Matrix = new Array(lengthMatrix);
         let number=1;
-        for (let i = 0; i < input; i++) {
-            matrix[i] = new Array(input);
-            for (let j = 0; j < input; j++)
-                matrix[i][j]=number++;
+
+        for (let i = 0; i < lengthMatrix; i++) {
+            Matrix[i] = number++;
+
         }
-        return matrix;
+        return Matrix;
     };
 
     let initializeMatrixinv = (input, Matrix_inv) => {
-        for (let i = 0; i < input -1;i++ ) {
-            for (let j= 0; j < input-i-1; j++) {
-                let copy = Matrix_inv[i][j];
-                Matrix_inv[i][j] =  Matrix_inv[input-i-1][input-j-1];
-                Matrix_inv[input-i-1][input-j-1] = copy;
+        let lengthMatrix = input*input;
+        let j = 1;
+        for (let i = 0; i < lengthMatrix/2;i++ ) {
+            if (j*(input-1) === i) {
+                j++;
+            }
+            else {
+                let copy = Matrix_inv[i];
+                Matrix_inv[i] = Matrix_inv[lengthMatrix -i -1];
+                Matrix_inv[lengthMatrix -i -1] = copy;
             }
         }
     };
 
     let showMatrix = (Matrix,input, name) => {
         let outputMatrix = name;
+        let lengthMatrix = Matrix.length;
         outputMatrix += `<table>`;
-        for (let i = 0; i < input; i++) {
-            outputMatrix +=`<tr>`;
-            for (let j = 0; j < input; j++) {
-                if (i+j === input-1)
-                    outputMatrix +=
-                    `<td class = elementsdiag>` + Matrix[i][j] + `</td>`;
-                else
-                    outputMatrix +=
-                    `<td class = elementsmatrix>` + Matrix[i][j] + `</td>`;
+        let j = 1;
+        outputMatrix +=`<tr>`;
+        for (let i = 0; i < lengthMatrix; i++) {
+
+            if (j*(input-1) === i) {
+                outputMatrix +=
+                `<td class = elementsdiag>` + Matrix[i] + `</td>`;
             }
-            outputMatrix +=`<tr>`;
+            else {
+                outputMatrix +=
+                `<td class = elementsmatrix>` + Matrix[i] + `</td>`;
+            }
+            if (i === (j*input-1)) {
+                outputMatrix +=`<tr>`;
+                j++;
+            }
         }
         outputMatrix +=`</table>`;
         return outputMatrix;
 
     };
-
     document.getElementById(`outputmat`).style.visibility = `visible`;
     let input = 1;
     while (input < 2) {
