@@ -1,4 +1,5 @@
 window.onload = () => {
+
     let createMatrix =(input) => {
         let matrix = new Array(input);
         let number=1;
